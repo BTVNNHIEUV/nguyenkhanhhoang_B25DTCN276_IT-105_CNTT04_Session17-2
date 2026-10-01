@@ -1,0 +1,92 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="Z-rpiXBb2d5dzZAtkXc7">
+    <mxGraphModel dx="2576" dy="911" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="shipper" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;" value="Shipper" vertex="1">
+          <mxGeometry height="80" width="50" x="-30" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="app" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="ShipperApp&#xa;(Presentation Tier)" vertex="1">
+          <mxGeometry height="70" width="160" x="160" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="service" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="DeliveryController /&#xa;DeliveryService&#xa;(Business Logic Tier)" vertex="1">
+          <mxGeometry height="110" width="210" x="425" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="repo" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="PackageRepository&#xa;(Data Tier)" vertex="1">
+          <mxGeometry height="70" width="170" x="670" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="db" parent="1" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#f5f5f5;strokeColor=#666666;" value="Package Database" vertex="1">
+          <mxGeometry height="70" width="150" x="1100" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="shipper" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="app" value="1. Xác nhận đã giao hàng">
+          <mxGeometry relative="1" x="-0.3749" y="20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="210" y="150.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="2. HTTP POST /deliveries/confirm&#xa;(DTO + GPS + COD + ảnh)">
+          <mxGeometry relative="1" x="-0.3973" y="35" as="geometry">
+            <mxPoint x="1" as="offset" />
+            <mxPoint x="299.99999999999955" y="285" as="sourcePoint" />
+            <mxPoint x="510.00000000000045" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="service" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="repo" value="3. Kiểm tra GPS + COD + điều kiện giao hàng">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="730" y="75" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="repo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="db" value="4. UPDATE Package SET Status=&#39;DELIVERED&#39;">
+          <mxGeometry relative="1" x="-0.1488" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;html=1;" target="repo" value="5. Kết quả lưu thành công">
+          <mxGeometry relative="1" x="-0.2918" y="-15" as="geometry">
+            <mxPoint x="-1" as="offset" />
+            <Array as="points">
+              <mxPoint x="780" y="375" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="service" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" value="200 OK">
+          <mxGeometry relative="1" x="0.0909" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="454.99999999999955" y="75" as="sourcePoint" />
+            <mxPoint x="270.00000000000045" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;dashed=1;html=1;" target="shipper" value="Hiển thị giao hàng thành công">
+          <mxGeometry relative="1" x="0.0002" y="15" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alt" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="ALT: Khách từ chối nhận / vắng nhà&#xa;FAILED_ATTEMPT_1" vertex="1">
+          <mxGeometry height="80" width="260" x="290" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="alt1" edge="1" parent="1" source="app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="alt" value="Gửi lý do từ chối">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="460.06" />
+              <mxPoint x="340" y="460.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alt2" edge="1" parent="1" source="alt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="service" value="Ghi FAILED_ATTEMPT_1 + tự lập lịch giao lại lần 2">
+          <mxGeometry relative="1" x="-0.0166" y="20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="470" y="460.06" />
+              <mxPoint x="560" y="460.06" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
